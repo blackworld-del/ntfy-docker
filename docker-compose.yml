@@ -8,12 +8,12 @@ services:
       - serve
     environment:
       - TZ=UTC    # optional: set desired timezone
-    user: UID:GID # optional: replace with your own user/group or uid/gid
+    user: 0:0 # optional: replace with your own user/group or uid/gid
     volumes:
       - /var/cache/ntfy:/var/cache/ntfy
       - /etc/ntfy:/etc/ntfy
     ports:
-      - 8083:8083  # Map port 8083 on the host to 8083 in the container
+      - 8083:80
     healthcheck: # optional: remember to adapt the host:port to your environment
         test: ["CMD-SHELL", "wget -q --tries=1 http://localhost:8083/v1/health -O - | grep -Eo '\"healthy\"\\s*:\\s*true' || exit 1"]
         interval: 60s
